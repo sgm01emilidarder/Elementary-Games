@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Tournament</title>
   <link rel="stylesheet" href="/css/index.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -61,7 +62,7 @@
       <h3>Fitxa joc</h3>
     </div>
     <div class="col-12">
-      <form>
+      <form name="foData">
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="nom">Nom</label>
@@ -69,11 +70,11 @@
           </div>
           <div class="form-group col-md-4">
             <label for="llançament">Llançament</label>
-            <input type="text" class="form-control" id="llançament">
+            <input type="date" class="form-control" id="llançament">
           </div>
           <div class="form-group col-md-4">
             <label for="pegi">Pegi</label>
-            <input type="text" class="form-control" id="pegi">
+            <input type="number" class="form-control" id="pegi">
           </div>
         </div>
         <div class="form-row">
@@ -92,7 +93,7 @@
             </select>
           </div>
         </div>
-        <button type="button" class="btn btn-primary float-right" onclick="doMapWork()">Nou joc</button>
+        <button type="button" class="btn btn-primary float-right" onclick="printGames()">Nou joc</button>
       </form>
     </div>
   </section>
@@ -107,30 +108,51 @@
           <th scope="col">Llançament</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+      <tbody id="tbody">
       </tbody>
     </table>
   </article>
+  <footer class="row">
+    <div class="col-12 d-flex justify-content-center mt-5">
+      <p>&copy Sergio Garcia</p>
+    </div>
+  </footer>
 
-  <script type="text/javascript" src="/js/index.js"></script>
+  <script type="text/javascript" src="js/Game.js"></script>
+  <!-- <script type="text/javascript" src="js/index.js"></script> -->
+  <script type="text/javascript">
+    let gameList = new Map();
+
+    gameList.set(gameList.size + 1, new Game("Monster Hunter World", "26/01/2018", 16, "Capcom", "Rol"))
+      .set(gameList.size + 1, new Game("Sekiro: Shadows Die Twice", "22/03/2019", 18, "From Software", "Accion"))
+      .set(gameList.size + 1, new Game("Clash Royale", "02/03/2016", 7, "Supercell", "Estrategia"));
+    for (let r of gameList.entries())
+      tbody.innerHTML += `<tr><td>${r[0]}</td><td>${r[1].nom}</td><td>${r[1].desenvolupador}</td><td>${r[1].llançament}</td></tr>`;
+
+    function printGames() {
+      let fNom = document.getElementById('nom').value;
+      let fLlançament = document.getElementById('llançament').value;
+      let fPegi = document.getElementById('pegi').value;
+      let fDesenvolupador = document.getElementById('desenvolupador').value;
+      let fGenere = document.getElementById('genere').options[document.getElementById('genere').selectedIndex].value;
+      let tbody = document.getElementById('tbody');
+      for (let r of gameList.entries())
+        if (r[1].nom === fNom) {
+                alert("el juego seleccionado ya esta inscrito en el torneo");
+                return false;
+        };
+        tbody.innerHTML = "";
+        gameList.set(gameList.size + 1, new Game(fNom, fLlançament, fPegi, fDesenvolupador, fGenere));
+        for (let r of gameList.entries())
+        tbody.innerHTML += `<tr><td>${r[0]}</td><td>${r[1].nom}</td><td>${r[1].desenvolupador}</td><td>${r[1].llançament}</td></tr>`;
+        document.foData.reset();
+        console.log(gameList);
+    };
+
+    window.onload = function() {
+
+    }
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

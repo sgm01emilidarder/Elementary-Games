@@ -1,12 +1,26 @@
-let firstMap = new Map();
-function doMapWork(){
-  let nom = document.getElementById('nom');
-  let llançament = document.getElementById('llançament');
-  let pegi = document.getElementById('pegi');
-  let desenvolupador = document.getElementById('desenvolupador');
-  let genere = document.getElementById('genere');
-  firstMap.set(firstMap.size + 1, { "nom":nom.value, "llançament": llançament.value, "pegi": pegi.value, "desenvolupador": desenvolupador.value });
-  for(let r of firstMap.entries())
-  console.log(`${r[0]}: ${r[1].nom}`);
-  console.log(nom.value, llançament.value, pegi.value, desenvolupador.value);
+function validateCamps(nom, llançament, pegi, desenvolupador, genere) {
+  if (nom === '' || llançament === '' || pegi === '' || desenvolupador === '' || genere === '') {
+    alert('Es necesario rellenar todos los campos del formulario');
+    return false;
+  } else {
+    return true;
+  };
+};
+
+function validateDate(date) {
+  if (/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(date)) {
+    return true;
+  } else {
+    alert('La fecha que has introducido no es válida');
+    return false;
+  };
+};
+
+function validatePegi(pegi) {
+  if (pegi === 3 || pegi === 7 || pegi === 12 || pegi === 16 || pegi === 18) {
+    return true;
+  } else {
+    alert('La edad que has introducido no es válida');
+    return false;
+  };
 };

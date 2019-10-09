@@ -7,5 +7,3 @@ class Game {
     this.genere = genere;
   };
 };
-
-gameList =
