@@ -24,3 +24,12 @@ function validatePegi(pegi) {
     return false;
   };
 };
+
+function checkDuplicateGame(pMap, pNom) {
+  if (pMap === pNom) {
+    alert("el juego seleccionado ya esta inscrito en el torneo");
+    return false;
+  } else {
+    return true;
+  };
+};
