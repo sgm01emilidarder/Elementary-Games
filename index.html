@@ -118,10 +118,34 @@
     </div>
   </footer>
 
+  <div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Alerta!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modalMsg">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="text/javascript" src="js/Game.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript">
     let gameList = new Map();
+
+    function message(msg) {
+      $("#modalMsg").html(msg);
+      $("#myModal").modal("show");
+    };
 
     gameList.set(gameList.size + 1, new Game("Monster Hunter World", "26/01/2018", 16, "Capcom", "Rol"))
       .set(gameList.size + 1, new Game("Sekiro: Shadows Die Twice", "22/03/2019", 18, "From Software", "Accion"))
@@ -131,25 +155,28 @@
 
     function printGames() {
       let fNom = document.getElementById('nom').value;
-      let fLlançament = document.getElementById('llançament').value;
+      let aLlançament = document.getElementById('llançament').value.split('-');
+      let fLlançament = aLlançament[2] + '/' + aLlançament[1] + '/' + aLlançament[0];
       let fPegi = document.getElementById('pegi').value;
       let fDesenvolupador = document.getElementById('desenvolupador').value;
       let fGenere = document.getElementById('genere').options[document.getElementById('genere').selectedIndex].value;
       let tbody = document.getElementById('tbody');
-      for (let r of gameList.entries())
-        // if (r[1].nom === fNom) {
-        //   alert("el juego seleccionado ya esta inscrito en el torneo");
-        //   return false;
-        // };
-        if (!checkDuplicateGame(r[1].nom, fNom)) {
+      if (validateCamps(fNom, fLlançament, fPegi, fDesenvolupador, fGenere)) {
+        if (validatePegi(fPegi)) {
+          for (let r of gameList.entries())
+            if (!checkDuplicateGame(r[1].nom, fNom)) {
+              return false;
+            };
+        } else {
           return false;
-        }
-      tbody.innerHTML = "";
-      gameList.set(gameList.size + 1, new Game(fNom, fLlançament, fPegi, fDesenvolupador, fGenere));
-      for (let r of gameList.entries())
-        tbody.innerHTML += `<tr><td>${r[0]}</td><td>${r[1].nom}</td><td>${r[1].desenvolupador}</td><td>${r[1].llançament}</td></tr>`;
-      document.foData.reset();
-      console.log(gameList);
+        };
+        tbody.innerHTML = "";
+        gameList.set(gameList.size + 1, new Game(fNom, fLlançament, fPegi, fDesenvolupador, fGenere));
+        for (let r of gameList.entries())
+          tbody.innerHTML += `<tr><td>${r[0]}</td><td>${r[1].nom}</td><td>${r[1].desenvolupador}</td><td>${r[1].llançament}</td></tr>`;
+        document.foData.reset();
+        console.log(gameList);
+      };
     };
   </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
