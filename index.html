@@ -161,6 +161,7 @@
       let fDesenvolupador = document.getElementById('desenvolupador').value;
       let fGenere = document.getElementById('genere').options[document.getElementById('genere').selectedIndex].value;
       let tbody = document.getElementById('tbody');
+      
       if (validateCamps(fNom, fLlançament, fPegi, fDesenvolupador, fGenere)) {
         if (validatePegi(fPegi)) {
           for (let r of gameList.entries())
