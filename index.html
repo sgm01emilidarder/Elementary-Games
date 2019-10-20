@@ -93,7 +93,7 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary float-right" onclick="printGames()">Nou joc</button>
+        <button type="button" class="btn btn-primary float-right" onclick="printGames()">Nou joc</button>
       </form>
     </div>
   </section>
@@ -138,7 +138,7 @@
   </div>
 
   <script type="text/javascript" src="js/Game.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="data:application/octet-stream;base64,ZnVuY3Rpb24gdmFsaWRhdGVDYW1wcyhub20sIGxsYW7Dp2FtZW50LCBwZWdpLCBkZXNlbnZvbHVwYWRvciwgZ2VuZXJlKSB7DQogIGlmIChub20gPT09ICcnIHx8IGxsYW7Dp2FtZW50ID09PSAnJyB8fCBwZWdpID09PSAnJyB8fCBkZXNlbnZvbHVwYWRvciA9PT0gJycgfHwgZ2VuZXJlID09PSAnJykgew0KICAgIGFsZXJ0KCdFcyBuZWNlc2FyaW8gcmVsbGVuYXIgdG9kb3MgbG9zIGNhbXBvcyBkZWwgZm9ybXVsYXJpbycpOw0KICAgIHJldHVybiBmYWxzZTsNCiAgfSBlbHNlIHsNCiAgICByZXR1cm4gdHJ1ZTsNCiAgfTsNCn07DQoNCmZ1bmN0aW9uIHZhbGlkYXRlUGVnaShwUGVnaSkgew0KICBpZiAocFBlZ2kgPiAxOCkgew0KICAgIGFsZXJ0KCJFbCB2YWxvciBkZSBwZWdpIGRlYmUgc2VyIHVuIG51bWVyaWNvIGVudHJlIDAgeSAxOCIpDQogICAgcmV0dXJuIGZhbHNlOw0KICB9IGVsc2Ugew0KICAgIHJldHVybiB0cnVlOw0KICB9DQp9DQoNCmZ1bmN0aW9uIGNoZWNrRHVwbGljYXRlR2FtZShwTWFwLCBwTm9tKSB7DQogIGlmIChwTWFwID09PSBwTm9tKSB7DQogICAgYWxlcnQoImVsIGp1ZWdvIHNlbGVjY2lvbmFkbyB5YSBlc3RhIGluc2NyaXRvIGVuIGVsIHRvcm5lbyIpOw0KICAgIHJldHVybiBmYWxzZTsNCiAgfSBlbHNlIHsNCiAgICByZXR1cm4gdHJ1ZTsNCiAgfTsNCn07DQo="></script>
   <script type="text/javascript">
     let gameList = new Map();
 
@@ -161,7 +161,7 @@
       let fDesenvolupador = document.getElementById('desenvolupador').value;
       let fGenere = document.getElementById('genere').options[document.getElementById('genere').selectedIndex].value;
       let tbody = document.getElementById('tbody');
-      
+
       if (validateCamps(fNom, fLlançament, fPegi, fDesenvolupador, fGenere)) {
         if (validatePegi(fPegi)) {
           for (let r of gameList.entries())
