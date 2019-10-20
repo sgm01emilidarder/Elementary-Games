@@ -62,7 +62,7 @@
       <h3>Fitxa joc</h3>
     </div>
     <div class="col-12">
-      <form name="foData">
+      <form name="foData" onsubmit="return false">
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="nom">Nom</label>
@@ -93,7 +93,7 @@
             </select>
           </div>
         </div>
-        <button type="button" class="btn btn-primary float-right" onclick="printGames()">Nou joc</button>
+        <button type="submit" class="btn btn-primary float-right" onclick="printGames()">Nou joc</button>
       </form>
     </div>
   </section>

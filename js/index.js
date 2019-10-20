@@ -1,6 +1,6 @@
 function validateCamps(nom, llançament, pegi, desenvolupador, genere) {
   if (nom === '' || llançament === '' || pegi === '' || desenvolupador === '' || genere === '') {
-    message('Es necesario rellenar todos los campos del formulario');
+    alert('Es necesario rellenar todos los campos del formulario');
     return false;
   } else {
     return true;
